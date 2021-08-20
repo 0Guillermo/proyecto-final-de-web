@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-ay^@zm0gi@_y9&la2=lhmijy-#m175(g=5*_q+r22er+(exp-t
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+#'192.168.1.36'
 
 # Application definition
 
@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.jugadores',
+    'apps.jugar_preguntas',
+    'apps.jugar_preguntas.preguntas',
 ]
 
 MIDDLEWARE = [

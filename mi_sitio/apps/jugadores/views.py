@@ -4,9 +4,9 @@ from .models import jugadores
 
 def lista_de_jugadores (request):
     template_name="participantes/participante.html"
-    lista_de_amigos = jugadores.objects.all()
+    lista_de_amigos = jugadores.objects.all() # esto es una base de datos
     ctx = {
-        'jugador': lista_de_amigos, # la keys amigos va estar disponible para usar en el archivo HTMl puede ser cualquier cosa esta keys
+        'jugador': lista_de_amigos,
     }
     return  render(request,template_name, ctx)
 # Create your views here.
