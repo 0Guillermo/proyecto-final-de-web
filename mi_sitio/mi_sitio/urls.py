@@ -4,7 +4,8 @@ from .views import inicio
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('inicio/', inicio),
-    path('admin/',include('apps.jugadores.urls')),
+    path('admin/',include('apps.jugar_preguntas.jugadores.urls')),
     path('admin/',include('apps.jugar_preguntas.preguntas.urls')),
+    path('inicio/', inicio),
+    path('inicio/', include('apps.jugar_preguntas.urls')),
 ]

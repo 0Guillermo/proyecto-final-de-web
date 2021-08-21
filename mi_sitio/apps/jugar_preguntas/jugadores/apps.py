@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class JugadoresConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.jugadores'
+    name = 'apps.jugar_preguntas.jugadores'

@@ -1,6 +1,6 @@
 from django.db import models
 
-class cargar_pregunta (models.Model):
+class cargar_pregunta(models.Model):
     pregunta = models.CharField(max_length=255)
     respuesta_correcta = models.CharField(max_length=255)
     respuesta1 = models.CharField(max_length=255)
