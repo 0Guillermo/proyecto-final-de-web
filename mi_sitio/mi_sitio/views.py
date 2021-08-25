@@ -1,4 +1,6 @@
 from django.shortcuts import  render
+from django.contrib.auth.models import User
+
 def inicio(request):
     template_name="inicio.html"
     lista_almunos=[

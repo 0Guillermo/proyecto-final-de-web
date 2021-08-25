@@ -25,9 +25,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.jugadores',
+    'apps.preguntas',
     'apps.jugar_preguntas',
-    'apps.jugar_preguntas.jugadores',
-    'apps.jugar_preguntas.preguntas',
 ]
 
 MIDDLEWARE = [

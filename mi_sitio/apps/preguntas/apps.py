@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class JugadoresConfig(AppConfig):
+class PreguntasConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'apps.jugar_preguntas.jugadores'
+    name = 'apps.preguntas'
