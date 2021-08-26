@@ -1,6 +1,20 @@
 {% extends "base/base.html" %}
 
 {% block contenido %}
+ <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading">bienvenido a mi juego del info </h1>
+          <p class="lead text-muted"> Aqui podras aprender todo sobre la Provincia de Chaco  </p>
+          <p class="lead text-muted"> mientras te diviertes jugando. </p>
+          {% if not user.is_authenticated %}
+            <p>
+              <a href="{% url 'login' %}" class="btn btn-primary my-2">Iniciar sesion</a>
+
+              <!--<a href="#" class="btn btn-secondary my-2">Secondary action</a>-->
+            </p>
+          {% endif %}
+        </div>
+      </section>
   <div class="album py-5 bg-light">
     <div class="container">
 
@@ -12,7 +26,8 @@
               <p class="card-text">juego de preguntas y respuestas.</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">jugar</button>
+                 <button href="{% url 'jugar' %}" type="button" class="btn btn-sm btn-outline-secondary">jugar </button>
+
                 </div>
               </div>
             </div>

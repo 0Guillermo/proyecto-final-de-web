@@ -5,7 +5,7 @@
     <meta name="author" content="">
     <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Sitio de prestamos de DVDs</title>
+    <title>grupo 14</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/album/">
 
@@ -33,12 +33,15 @@
               <h4 class="text-white">OPCIONES</h4>
               <ul class="list-unstyled">
                 <li><a href="{% url 'inicio' %}" class="text-white">inicio </a></li>
-                <li><a href="#" class="text-white">crear cuenta nueva </a></li>
+
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'logout' %}" class="text-white">Cerrar sesion</a></li>
+                  <li><a href='jugadores' class="text-white">perfil</a></li>
                 {% else %}
                   <li><a href="{% url 'login' %}" class="text-white">Iniciar sesion</a></li>
+                  <li><a href="{% url 'registrarse' %}" class="text-white">crear cuenta nueva </a></li>
                 {% endif %}
+
               </ul>
             </div>
           </div>
@@ -59,23 +62,10 @@
 
     <main role="main">
 
-      <section class="jumbotron text-center">
-        <div class="container">
-          <h1 class="jumbotron-heading">bienvenido a mi juego del info </h1>
-          <p class="lead text-muted"> Aqui podras aprender todo sobre la Provincia de Chaco  </p>
-          <p class="lead text-muted"> mientras te diviertes jugando. </p>
-          {% if not user.is_authenticated %}
-            <p>
-              <a href="{% url 'login' %}" class="btn btn-primary my-2">Iniciar sesion</a>
-              <!--<a href="#" class="btn btn-secondary my-2">Secondary action</a>-->
-            </p> 
-          {% endif %}
-          
-        </div>
-      </section>
+
 
       {% block contenido %}
-        
+
       {% endblock contenido %}
 
     </main>

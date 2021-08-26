@@ -1,10 +1,12 @@
 from django.shortcuts import render
 
-from .preguntas.models import cargar_pregunta
+from .models import jugar
 
-class jugar(models.Model):
-    lista_de_amigos = cargar_preguntas.objects.all()
+def jugar(request):
+    template_name="jugar/jugar_preguntas.html"
+    opciones = jugar.objects.all()
     ctx = {
-        'jugador': lista_de_amigos,
+        'jugar': opciones,
     }
-# Create your views here.
+    return render(request,template_name,ctx)
+

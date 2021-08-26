@@ -6,8 +6,12 @@ from .views import inicio
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('inicio/', inicio,name="inicio"),
-    path('admin/',include('apps.jugadores.urls')),
-    path('admin/',include('apps.preguntas.urls')),
     path('login/', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path('logout/', auth_views.logout_then_login, name="logout"),
+    path('inicio/',include('apps.usuario.urls'),name="registrarse"),
+    path('inicio/',include('apps.jugar_preguntas.urls'),name="jugar"),
+    path('inicio/',include('apps.usuario.urls')),# ver esto como unir al usuario con el jugador!!!!!!
+    path('inicio/',include('apps.jugadores.urls'),name="jugadores"),
+    path('admin/',include('apps.preguntas.urls')),
+
 ]

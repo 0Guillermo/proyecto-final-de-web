@@ -1,9 +1,9 @@
 from django.db import models
 
-class jugadores(models.Model):
-    nombre = models.CharField(max_length=255, null=True)
-    apellido = models.CharField(max_length=255, null=True)
-    localidad = models.CharField(max_length=255, null=True)
+class jugadore(models.Model):
+    nombre = models.CharField(max_length=255)
+    apellido = models.CharField(max_length=255)
+    localidad = models.CharField(max_length=255)
     telefono = models.CharField(max_length=255, null=True)
     email = models.CharField(max_length=255, null=True)
 

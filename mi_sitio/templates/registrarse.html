@@ -1,0 +1,26 @@
+{% extends "base/base.html" %}
+
+{% block contenido %}
+    <html lang="es">
+    <head>
+        <meta charset=UTF-8">
+        <meta name="viewport" content="width=device=width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>registrarse</title>
+    </head>
+    <body>
+        <h2> registro de usuario</h2>
+
+        <form action="" method="POST">
+            {%csrf_token%}
+            <table>
+                {{form.as_table}}
+            </table>
+            <input type="reset" value="limpiar">
+            <input type="submit" value="registra">
+
+        </form>
+
+    </body>
+    </html>
+{% endblock contenido %}
