@@ -1,35 +1,46 @@
 from django.db import models
 from apps.jugadores.models import jugadore
 
+class categoria(models.Model):
+    categoria_name = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'categorias'
+
+    def __str__(self):
+        return f"id{self.id}: {self.categoria_name}"
+
+
+class respuesta_correcta(models.Model):
+    respuesta_correcta = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'respuesta_correcta'
+
+    def __str__(self):
+        return f"id {self.id}): {self.respuesta_correcta}"
+
+class respuesta_incorrecta(models.Model):
+
+    respuesta_incorrecta = models.CharField(max_length=255)
+
+    class Meta:
+        db_table = 'respuesta_incorrecta'
+
+    def __str__(self):
+        return f"id {self.id}: {self.respuesta_incorrecta}"
+
 class cargar_pregunta(models.Model):
     pregunta = models.CharField(max_length=255)
+    categoria = models.ManyToManyField(categoria, related_name="categoria")
+    respuesta_correcta = models.ManyToManyField(respuesta_correcta, related_name="respuesta_correctas")
+    respuesta_incorrecta = models.ManyToManyField(respuesta_incorrecta, related_name="respuesta_incorrectas")
 
     class Meta:
         db_table = 'preguntas'
 
     def __str__(self):
-        return self.id, self.pregunta
-
-    def __str__(self):
-        return self.pregunta
-
-
-class cargar_respuesta(models.Model):
-    pregunta = models.ForeignKey(cargar_pregunta, on_delete=models.CASCADE,null=True)
-    respuesta_correcta = models.CharField(max_length=255)
-    respuesta1 = models.CharField(max_length=255)
-    respuesta2 = models.CharField(max_length=255)
-    respuesta3 = models.CharField(max_length=255)
-
-    class Meta:
-        db_table = 'respuestas'
-
-    def __str__(self):
-        return self.id, self.pregunta
-
-    def __str__(self):
-        return self.pregunta,self.respuesta_correcta,self.respuesta1,self.respuesta2,self.respuesta3
-
+        return f"{self.id}): {self.pregunta}"
 
 """class jugador_juega(models.Model):
     jugador = models.ForeignKey(jugadores, on_delete=models.CASCADE)
@@ -37,4 +48,8 @@ class cargar_respuesta(models.Model):
 
     class Meta:
         db_table = 'jugador_juega'
+        
+    ver como hacer esto para que el jugador acceda a esta preguntas
+    pero creo que esto tiene ue estar cargado en la apps jugar_preguntas!!!!!!!!!!
+        
 """

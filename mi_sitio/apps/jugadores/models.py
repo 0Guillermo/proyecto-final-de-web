@@ -4,7 +4,7 @@ class jugadore(models.Model):
     nombre = models.CharField(max_length=255)
     apellido = models.CharField(max_length=255)
     localidad = models.CharField(max_length=255)
-    telefono = models.CharField(max_length=255, null=True)
+    telefono = models.CharField(max_length=255, null=True) #esto va ir en una tabla aparte
     email = models.CharField(max_length=255, null=True)
 
     class Meta:
