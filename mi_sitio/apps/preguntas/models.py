@@ -1,5 +1,5 @@
 from django.db import models
-from apps.jugadores.models import jugadore
+#from apps.jugadores.models import jugadore
 
 class categoria(models.Model):
     categoria_name = models.CharField(max_length=255)
@@ -8,7 +8,7 @@ class categoria(models.Model):
         db_table = 'categorias'
 
     def __str__(self):
-        return f"id{self.id}: {self.categoria_name}"
+        return self.categoria_name
 
 
 class respuesta_correcta(models.Model):
@@ -18,10 +18,9 @@ class respuesta_correcta(models.Model):
         db_table = 'respuesta_correcta'
 
     def __str__(self):
-        return f"id {self.id}): {self.respuesta_correcta}"
+        return f"{self.id}): {self.respuesta_correcta}"
 
 class respuesta_incorrecta(models.Model):
-
     respuesta_incorrecta = models.CharField(max_length=255)
 
     class Meta:
@@ -32,15 +31,35 @@ class respuesta_incorrecta(models.Model):
 
 class cargar_pregunta(models.Model):
     pregunta = models.CharField(max_length=255)
-    categoria = models.ManyToManyField(categoria, related_name="categoria")
-    respuesta_correcta = models.ManyToManyField(respuesta_correcta, related_name="respuesta_correctas")
+    categoria = models.ForeignKey(categoria, on_delete=models.CASCADE, null=True)
     respuesta_incorrecta = models.ManyToManyField(respuesta_incorrecta, related_name="respuesta_incorrectas")
+    respuesta_correcta = models.ManyToManyField(respuesta_correcta, related_name="respuesta_correctas")
+
+
 
     class Meta:
         db_table = 'preguntas'
 
     def __str__(self):
-        return f"{self.id}): {self.pregunta}"
+        return f"{self.id}): {self.pregunta}{self.respuesta_incorrecta}"
+
+
+"""
+listo = categoria.objects.filter( a = cargar_pregunta.objects.filter(id=4))
+print("====================================")
+print(listo)
+"""
+b = cargar_pregunta.objects.filter(id=4)
+for g in b:
+    print("=================================")
+    print(g.categoria)
+    print(g.pregunta)
+    print(g.respuesta_incorrecta) #buscar porque esto devuelve NONE
+    print("================================")
+
+
+
+
 
 """class jugador_juega(models.Model):
     jugador = models.ForeignKey(jugadores, on_delete=models.CASCADE)
