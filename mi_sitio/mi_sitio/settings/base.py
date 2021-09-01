@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'apps.jugadores',
     'apps.preguntas',
     'apps.usuario',
+    "apps.estadisticas",
 ]
 
 MIDDLEWARE = [

@@ -1,6 +1,6 @@
 from django.shortcuts import render
 
-from .models import cargar_pregunta, respuesta_incorrecta, respuesta_correcta
+from .models import cargar_pregunta, respuesta_incorrecta, respuesta_correcta, categoria
 
 def lista_de_preguntas (request):
     template_name="preguntas/cargar_preguntas.html"
@@ -15,5 +15,5 @@ def lista_de_preguntas (request):
         'pregunta': lista_de_preguntas,
         'respuesta': lista_correctas,
         'incorrecta': lista_incorrectas,
-    }
+        }
     return  render(request,template_name, ctx)

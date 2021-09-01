@@ -1,19 +1,47 @@
+<title>jugar</title>
 {% extends "base/base.html" %}
 
 {% block contenido %}
-<html lang="es">
-    <head>
-        <meta charset=UTF-8">
-            <title>jugar</title>
-    </head>
-        <body>
-        <form method="POST"> {% csrf_token %}
-            {{form.as_p}}
-            {{form.cargar_pregunta}}
 
+     <div class="mb-3">
+        <label class="form-label">pregunta {{cont}}</label>
+           <div class="form-text">{{pregunta}}</div>
+     </div>
+  <div>
+    <label class="form-label">opciones</label>
+  </div>
+    <dir>
 
-            <button type="submit" > un boton</button>
-        </form>
-        </body>
-</html>
+        <form action="" method="POST">
+        {% csrf_token %}
+        {% if longitud %}
+        {% for c in correcta %}
+        <input type="checkbox" class="form-check-input">
+        <div><label class="badge badge-primary">{{c.correcta}}</label></div>
+        {% endfor %}
+        {% for c in incorrecta %}
+        <input type="checkbox" class="form-check-input">
+        <div><label class="badge badge-primary">{{c.incorrecta}}</label></div>
+
+        {% endfor %}
+        {% else %}
+        {% for c in incorrecta %}
+            <div >
+              <input class="form-check-input" type="radio" >
+              <label class="form-check-label">{{c.incorrecta}}</label>
+            </div>
+            {% endfor %}
+        {% for c in correcta %}
+            <div>
+              <input class="form-check-input" type="radio" >
+              <label class="form-check-label">{{c.correcta}}</label>
+            </div>
+            {% endfor %}
+
+        {% endif %}
+        <div>{{form}}</div>
+    </div>
+        <button type="submit" class="btn btn-primary">enviar</button>
+</form>
+
 {% endblock contenido %}
