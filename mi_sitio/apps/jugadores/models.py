@@ -11,6 +11,6 @@ class jugadore(models.Model):
         db_table = 'jugadores'
 
     def __str__(self):
-        return self.nombre
+        return f"{self.id} {self.nombre} {self.apellido} {self.localidad} {self.telefono} {self.email}"
 
 # Create your models here.

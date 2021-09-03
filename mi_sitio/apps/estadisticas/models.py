@@ -7,15 +7,11 @@ ESTADO_CHOICE =(
 )
 class estadisticas(models.Model):
     participante = models.ForeignKey(jugadore, on_delete=models.CASCADE)
-    juegos = models.ManyToManyField(jugar)
-    feche_ingreso = models.DateTimeField()
-    fecha_salida = models.DateTimeField()
-    Puntuacion = models.IntegerField()
+    juegos = models.ForeignKey(jugar, on_delete=models.CASCADE)
     estado = models.CharField(max_length=6,choices=ESTADO_CHOICE)
-    nivel = models.IntegerField()
 
     class Meta:
         db_table = "estadisticas"
 
     def __str__(self):
-        return self.participante
+        return self.estado

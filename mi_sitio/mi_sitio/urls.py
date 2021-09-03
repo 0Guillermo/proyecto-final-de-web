@@ -10,8 +10,12 @@ urlpatterns = [
     path('logout/', auth_views.logout_then_login, name="logout"),
     path('inicio/',include('apps.usuario.urls'),name="registrarse"),
     path('inicio/',include('apps.jugar_preguntas.urls'),name="jugar"),
-    path('inicio/',include('apps.usuario.urls')),# ver esto como unir al usuario con el jugador!!!!!!
+    path('inicio/',include('apps.estadisticas.urls'),name="estadisticas"),
+
+    # ver como unir al usuario con el jugador!!!!!!
     path('inicio/',include('apps.jugadores.urls'),name="jugadores"),
+
+
     path('admin/',include('apps.preguntas.urls')),
 
 ]

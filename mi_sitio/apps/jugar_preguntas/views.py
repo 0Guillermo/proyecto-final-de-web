@@ -7,20 +7,25 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from apps.preguntas.models import cargar_pregunta, respuesta_incorrecta, respuesta_correcta, categoria
 
 from .forms import jugarForm
+from apps.estadisticas.forms import EstadisticasForm
 
 def jugar_preg(request):
     template_name = "jugar/jugar_preguntas.html"
     if request.method == "POST":
         forms = jugarForm(request.POST)
+        print(forms,"===========================================")
+        # if forms.is_valid:
         forms.save()
         return redirect("jugar")
     else:
         forms = jugarForm()
 
-    data = {
-        "form":forms,
-    }
-
+    #
+    #ver como hacer para guardar en estadisticas el usuario asosiado a la cuenta
+    #en la estadisticas guardar el id del juego
+    #y en estado guardar la variable gano o perdio dependiendo que pregunta responde
+    #
+    #
     cargar = jugar.objects.filter(id=1)
     for a in cargar:
        preg = a.cargar_pregunta.all()

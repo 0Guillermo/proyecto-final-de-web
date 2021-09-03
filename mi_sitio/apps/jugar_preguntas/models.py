@@ -8,14 +8,18 @@ ESTADOS_CHOICES = (
 
 class jugar(models.Model):
     cargar_pregunta = models.ManyToManyField(cargar_pregunta, related_name="cargar_pregunta")
-    puntaje = models.CharField(max_length=255,null=True) #esto tiene que ser un metodo creo.
-    estado = models.CharField(max_length=255,choices=ESTADOS_CHOICES,null=True) # si hacierta la preguntas suma alguna clase de puntos
-    categoria = models.ForeignKey(categoria, on_delete=models.CASCADE, null=True)
+    estado = models.CharField(max_length=255,choices=ESTADOS_CHOICES,null=True)
 
+    # puntaje = models.CharField(max_length=255,null=True)  # si hacierta la preguntas suma alguna clase de puntos
+
+#
+#en esta tabla es donde eñ usuario tiene que cargar lo que eligio
+#
+#
 
     class Meta: 
         db_table = 'jugar'
 
     def __str__(self):
-        return f"{self.cargar_pregunta} {self.puntaje}{self.estado}"
+        return f"{self.cargar_pregunta} {self.estado}"#{self.puntaje}
 

@@ -2,46 +2,49 @@
 {% extends "base/base.html" %}
 
 {% block contenido %}
+<dir>
+<form action="" method="POST">{% csrf_token %}
+    <div>
+        <label class="form-label">pregunta </label>
 
-     <div class="mb-3">
-        <label class="form-label">pregunta {{cont}}</label>
-           <div class="form-text">{{pregunta}}</div>
-     </div>
-  <div>
-    <label class="form-label">opciones</label>
-  </div>
-    <dir>
+        <div class="form-text">{{pregunta}}</div></div>
 
-        <form action="" method="POST">
-        {% csrf_token %}
-        {% if longitud %}
-        {% for c in correcta %}
+    <div class="mb-3">
+        <label class="form-label">opciones</label></div>
+
+    {% for c in cargar.cargar_pregunta%}
         <input type="checkbox" class="form-check-input">
-        <div><label class="badge badge-primary">{{c.correcta}}</label></div>
+        <div><label class="badge badge-primary">{{c.pregunta}}</label></div>
+    {% endfor %}
+
+    {% if longitud %}
+        {% for c in correcta%}
+            <input type="checkbox" class="form-check-input">
+            <div><label class="badge badge-primary">{{c.correcta}}</label></div>
         {% endfor %}
-        {% for c in incorrecta %}
-        <input type="checkbox" class="form-check-input">
-        <div><label class="badge badge-primary">{{c.incorrecta}}</label></div>
+    {% for c in incorrecta %}
+            <input type="checkbox" class="form-check-input">
+            <div><label class="badge badge-primary">{{c.incorrecta}}</label></div>
 
         {% endfor %}
-        {% else %}
-        {% for c in incorrecta %}
-            <div >
-              <input class="form-check-input" type="radio" >
-              <label class="form-check-label">{{c.incorrecta}}</label>
-            </div>
+    {% else %}
+            {% for c in incorrecta %}
+                <div >
+                <input class="form-check-input" type="radio" >
+                <label class="badge badge-primary">{{c.incorrecta}}</label>
+                </div>
             {% endfor %}
-        {% for c in correcta %}
+    {% for c in form%}
             <div>
               <input class="form-check-input" type="radio" >
-              <label class="form-check-label">{{c.correcta}}</label>
+              <label class="badge badge-primary">{{c}}</label>
             </div>
             {% endfor %}
 
-        {% endif %}
-        <div>{{form}}</div>
-    </div>
-        <button type="submit" class="btn btn-primary">enviar</button>
+    {% endif %}
+
+</dir>
+        <dir><dir><button type="submit" class="btn btn-primary">enviar</button></dir></dir>
 </form>
 
 {% endblock contenido %}
