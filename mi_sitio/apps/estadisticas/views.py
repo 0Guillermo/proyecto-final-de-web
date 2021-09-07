@@ -18,7 +18,7 @@ def EstadisticasViews(request):
         return redirect("jugar")
     else:
         forms = jugarForm()
-
+    
     cargar = jugar.objects.filter(id=2)
     for a in cargar:
         preg = a.cargar_pregunta.all()
@@ -43,5 +43,6 @@ def EstadisticasViews(request):
         "form": forms,
         # poner un contador
     }
+    
     return render(request,template_name,data)
 

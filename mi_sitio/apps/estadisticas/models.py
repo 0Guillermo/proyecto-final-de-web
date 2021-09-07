@@ -5,10 +5,16 @@ ESTADO_CHOICE =(
     ("1","gano"),
     ("0","perdio")
 )
+
+
 class estadisticas(models.Model):
     participante = models.ForeignKey(jugadore, on_delete=models.CASCADE)
-    juegos = models.ForeignKey(jugar, on_delete=models.CASCADE)
-    estado = models.CharField(max_length=6,choices=ESTADO_CHOICE)
+    juegos = models.ForeignKey(jugar, on_delete=models.CASCADE, null=True)
+    estado = models.CharField(max_length=2,choices=ESTADO_CHOICE,null=True)
+    puntaje = models.IntegerField(null=True)
+    nivel = models.IntegerField(null=True)
+
+
 
     class Meta:
         db_table = "estadisticas"
