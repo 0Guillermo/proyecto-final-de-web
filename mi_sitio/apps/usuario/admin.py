@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import usuarios
 
-# Register your models here.
+
+class usuariosAdmin(admin.ModelAdmin):
+	list_display = ['id', 'nombre','apellido','localidad','telefono', 'email', 'puntos_total']
+admin.site.register(usuarios, usuariosAdmin)

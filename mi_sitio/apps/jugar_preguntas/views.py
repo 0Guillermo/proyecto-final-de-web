@@ -29,59 +29,60 @@ import random
 
 lista = []
 
-# ver como obtener al AZAR todas las preguntas de un atributos en este caso el atributo preguntar
 def jugar_preg(request,opcion=None):
     template_name = "jugar/jugar_preguntas.html"
-    print(opcion,"opcion-----nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
-    total_preg = jugar.objects.all() #esto poner que se guarde en una variable y una funcion para que solo pregunte una sola ves
+    total_preg = jugar.objects.all()#esto poner que se guarde en una variable y una funcion para que solo pregunte una sola ves
     a = len(total_preg)
     while True:
+        #hacer otro metodo de que tome el valor mas alto del id para dar los numero al aleatorio
         valor = int(random.random() * a+1)
-        print(valor,"valor----rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
         if a == len(lista):
             lista1 = []
             ## aca poner algo para que una ves que responda todas las preguntas disponibles diga algun msj de final 
             ## y que aprete tal boton para para volver a jugar
-            ##si la opcion es es uno entonces poner como ganado y subir un nivel
             break
-
         elif valor not in lista:
             lista.append(valor)
             print(lista,"lista----aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             break
 
-    #hacer otro metodo de que tome el valor mas alto del id para dar los numero al aleatorio
     cargar = jugar.objects.filter(id=valor)
-    lista_de_preguntas = []
     for a in cargar:
-       preg = a.cargar_pregunta.all()
-       for b in preg:
-           categ = b.categoria.all()
-           pregunta = b.pregunta
-           total_cort = 0
-           respuestas = b.respuestas.all()
-           for s in respuestas:
+        preg = a.cargar_pregunta.all()
+        for b in preg:
+            categ = b.categoria.all()
+            pregunta = b.pregunta
+            total_cort = 0
+            respuestas = b.respuestas.all() # ver como obtener al AZAR todas las preguntas de un atributos en este caso el atributo preguntas
+            for s in respuestas:
                 estados = s.estado
                 if estados == "1":
                     total_cort += 1
-                    print(total_cort,"total_cort----------ttttttttttttttttttttttttt")
-                print(estados,"estados----------ssssssssssssssssssssssssssssssss")
 
-    if total_cort < 2:
-           long = False
-    elif total_cort > 1:
-           long = True
+            if total_cort < 2:
+                   long = False
+            elif total_cort > 1:
+                   long = True
 
-    """## aca poner un punto de control de que si la opcion es 1 entonces la respuesta es correcta y guarde en estadisticas"""
-
-    data = {
-        'pregunta': pregunta,
-        'respuestas': respuestas,
-        "categoria":categ,
-        "longitud":long,
-        "total_preg":lista_de_preguntas,
-        #poner un contador
-    }
-    return render(request,template_name,data)
+            """## aca poner un punto de control de que si la opcion es 1 entonces la respuesta es correcta y guardar en el usuario el puntaje """
+            puntos = 0
+            if opcion == 1:##si la opcion es 1 entonces poner como ganado y subir un nivel
+                print(request.user, "ganooooooooooooooooo")
+                """
+                puntos += 10
+                if request.user.puntos_total< puntos:
+                    request.user.puntos_total = puntos
+                print(request.user.save(),"..........................................")
+                request.estadisticas.save()
+                """
+            data = {
+                'pregunta': pregunta,
+                'respuestas': respuestas,
+                "categoria":categ,
+                "longitud":long,
+                #poner un contador
+            }
+            return render(request,template_name,data)
+    return render(request, template_name)
 ## tambien solucionar la parte de que si no ahi preguntas cargado aca da un error porque no se hace ninguna iteracion
 ## y no se crea las variables preguntas, respuesta etc

@@ -10,14 +10,6 @@ class respuesta_correctaAdmin(admin.ModelAdmin):
     list_display = ["id","correcta"]
 admin.site.register(respuesta_correcta,respuesta_correctaAdmin)
 
-#class respuesta_incorrectaAdmin(admin.ModelAdmin):
-#    list_display = ["id","incorrecta"]
-#admin.site.register(respuesta_incorrecta,respuesta_incorrectaAdmin)
-
 class cargar_preguntaAdmin(admin.ModelAdmin):
     list_display = ["id","pregunta"]
 admin.site.register(cargar_pregunta, cargar_preguntaAdmin)
-
-#class respuestaAdmin(admin.ModelAdmin):
-#    list_display = ["id"]
-#admin.site.register(respuesta, respuestaAdmin)
