@@ -4,8 +4,7 @@ from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
 from django.http import HttpResponse
 from django.contrib.auth.mixins import LoginRequiredMixin
-from apps.preguntas.models import cargar_pregunta, respuesta_incorrecta, respuesta_correcta, categoria
-
+from apps.preguntas.models import cargar_pregunta, respuesta_correcta, categoria#, respuesta_incorrecta
 from .forms import jugarForm
 from apps.estadisticas.forms import EstadisticasForm
 import random
@@ -30,55 +29,59 @@ import random
 
 lista = []
 
+# ver como obtener al AZAR todas las preguntas de un atributos en este caso el atributo preguntar
 def jugar_preg(request,opcion=None):
     template_name = "jugar/jugar_preguntas.html"
-    print(opcion,"zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz")
-    #print(lista,"¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿¿")
+    print(opcion,"opcion-----nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn")
     total_preg = jugar.objects.all() #esto poner que se guarde en una variable y una funcion para que solo pregunte una sola ves
     a = len(total_preg)
     while True:
         valor = int(random.random() * a+1)
-        print(valor,"wwwwwwwwwwwwwwwwwwwwww")
-       # print(a,len(lista),"'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''")
+        print(valor,"valor----rrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
         if a == len(lista):
             lista1 = []
-            
             ## aca poner algo para que una ves que responda todas las preguntas disponibles diga algun msj de final 
-            ## y que aprete tal boton para para volver a jugar 
-            
-            break
-        elif valor not in lista:
-            lista.append(valor)
-            print(lista,"lkisaoaooooooooooooooooooooooooooooooooooooooooooooooo")
+            ## y que aprete tal boton para para volver a jugar
+            ##si la opcion es es uno entonces poner como ganado y subir un nivel
             break
 
+        elif valor not in lista:
+            lista.append(valor)
+            print(lista,"lista----aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+            break
+
+    #hacer otro metodo de que tome el valor mas alto del id para dar los numero al aleatorio
     cargar = jugar.objects.filter(id=valor)
     lista_de_preguntas = []
     for a in cargar:
        preg = a.cargar_pregunta.all()
        for b in preg:
-           pregunta = b.pregunta
-           incorrecta = b.respuesta_incorrecta.all()
-           print(incorrecta,"7777777777777777777777777777777")
-           correcta = b.respuesta_correcta.all()
            categ = b.categoria.all()
-    long = len(correcta)
+           pregunta = b.pregunta
+           total_cort = 0
+           respuestas = b.respuestas.all()
+           for s in respuestas:
+                estados = s.estado
+                if estados == "1":
+                    total_cort += 1
+                    print(total_cort,"total_cort----------ttttttttttttttttttttttttt")
+                print(estados,"estados----------ssssssssssssssssssssssssssssssss")
 
-    print(correcta,"#######################################")
-    print(b,"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-    
-    if long < 2:
+    if total_cort < 2:
            long = False
-    elif long > 1:
+    elif total_cort > 1:
            long = True
+
+    """## aca poner un punto de control de que si la opcion es 1 entonces la respuesta es correcta y guarde en estadisticas"""
 
     data = {
         'pregunta': pregunta,
-        'correcta': correcta,
-        'incorrecta': incorrecta,
+        'respuestas': respuestas,
         "categoria":categ,
         "longitud":long,
         "total_preg":lista_de_preguntas,
         #poner un contador
     }
     return render(request,template_name,data)
+## tambien solucionar la parte de que si no ahi preguntas cargado aca da un error porque no se hace ninguna iteracion
+## y no se crea las variables preguntas, respuesta etc

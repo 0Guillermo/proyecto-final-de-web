@@ -5,46 +5,21 @@
 
 <form action="" method="POST">{% csrf_token %}
     <dir>
-    <div>
-        <label class="form-label">pregunta </label>
-
-        <div class="form-text">{{pregunta}}</div></div>
-
-    <div class="mb-3">
-        <label class="form-label">opciones</label></div>
-
-    {% for c in cargar.cargar_pregunta%}
-        <input type="checkbox" class="form-check-input">
-        <div><label class="badge badge-primary">{{c.pregunta}}</label></div>
-    {% endfor %}
+        <div><label class="form-label">pregunta </label>
+            <div class="form-text">{{pregunta}}</div></div>
+        <div class="mb-3"><label class="form-label">opciones</label></div>
 
     {% if longitud %}
-        {% for c in correcta%}
-                <input type="checkbox" class="form-check-input">
-                <div><label class="badge badge-primary">{{c.correcta}}</label></div>
-        {% endfor %}
-            {% for c in incorrecta %}
+            {% for c in respuestas %}
                <div> <input type="checkbox" class="form-check-input">
-                <label class="badge badge-primary">{{c.incorrecta}}</label></div>
-
+                   <label class="badge badge-primary">{{c.correcta}}</label></div>
             {% endfor %}
     {% else %}
-            {% for c in incorrecta %}
+            {% for c in respuestas %}
                 <div >
-                     <a href="{% url 'jugar' 0%}" class="btn btn-outline-primary">{{c.incorrecta}}</a>
+                     <a href="{% url 'jugar' c.estado %}" class="btn btn-outline-primary">{{c.correcta}}</a>
                 </div>
             {% endfor %}
-
-            {% for c in correcta%}
-                <div>
-                <a href="{% url 'jugar' 1%}" class="btn btn-outline-primary">{{c.correcta}}</a></div>
-            {% endfor %}
-
-            {% for a in total_preg%}
-                <div> <input type="checkbox" class="form-check-input">
-                <label class="badge badge-primary">{{a}}</label></div>
-            {% endfor %}
-
     {% endif %}
 
     </dir>

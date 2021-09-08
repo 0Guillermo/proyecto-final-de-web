@@ -1,5 +1,5 @@
 from django.db import models
-from apps.preguntas.models import cargar_pregunta,  respuesta_correcta, respuesta_incorrecta, categoria
+from apps.preguntas.models import cargar_pregunta,  respuesta_correcta, categoria#, respuesta_incorrecta
 
 ESTADOS_CHOICES = (
     ("1","ACTIVO"),
